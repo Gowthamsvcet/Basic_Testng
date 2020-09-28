@@ -6,6 +6,7 @@
       <class name="crmfa.Crfma">
         <methods>
           <include name="Login1"/>
+          <include name="Login"/>
           <include name="Close"/>
         </methods>
       </class> <!-- crmfa.Crfma -->

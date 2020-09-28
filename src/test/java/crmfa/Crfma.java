@@ -3,6 +3,9 @@ package crmfa;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -16,8 +19,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import excelData.Excel;
 import testBase.Test_base;
 
 public class Crfma extends Test_base {
@@ -31,7 +36,8 @@ public Crfma() throws IOException
         System.out.println(div);
 	}
 @Test
-	public void Login1() throws IOException {
+@DataProvider
+	public void Login1() throws Exception {
          WebElement ele = driver.findElement(By.cssSelector("input#username"));
 			ele.sendKeys(prop.getProperty("username"));
 		 WebElement Pass = driver.findElement(By.cssSelector("input#password"));
@@ -54,7 +60,7 @@ public Crfma() throws IOException
 		String mainwindow = driver.getWindowHandle();
 		System.out.printf( "Here parent Window Id", mainwindow);
 		 Set <String> set = driver.getWindowHandles();
-		 /*Iterator<String> IA = set.iterator();
+		 Iterator<String> IA = set.iterator();
 		 while (IA.hasNext()) {
 			 String childwindow = IA.next();
 			 if(!mainwindow.equals(childwindow)) {
@@ -66,7 +72,7 @@ public Crfma() throws IOException
 				  //driver.close();
 				  }
 		 }
-				 driver.switchTo().window(mainwindow);*/
+				 driver.switchTo().window(mainwindow);
 				 
 		 ArrayList<String> tabs = new ArrayList<String>(set);
 		 {
@@ -95,7 +101,12 @@ public Crfma() throws IOException
 		
 		File Screen	= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(Screen, new File("./Screenshot/Crmfa.png"));
-		}
+		Excel data = new Excel();
+		data.excel();
+		/*Map<String,String> ma = new HashMap<String, String>();*/
+		return;
+
+}
 		
         
 	@AfterMethod
